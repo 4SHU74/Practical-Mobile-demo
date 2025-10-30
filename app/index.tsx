@@ -18,7 +18,24 @@ export default function Index() {
       const response = await fetch(
         "https://pokeapi.co/api/v2/pokemon/?limit=10"
       );
+
       const data = await response.json();
+
+      // Fetch detailed info for each pokemon in parallel
+      const detailedPokemons = await Promise.all(
+        data.result.map(async (pokemon) => {
+          const res = await fetch(pokemon.url);
+          const details = await res.json();
+          return {
+            name: pokemon.name,
+            image: details.sprites.front_default,
+            // main sprite
+          };
+        })
+      );
+
+      console.log(detailedPokemons);
+
       setPokemons(data.results);
     } catch (e) {
       console.log(e);
