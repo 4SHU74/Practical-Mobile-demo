@@ -16,10 +16,10 @@ interface PokemonType {
   // url: "https://pokeapi.co/api/v2/type/18";
 }
 
-// const colorsByType = {
-//   grass: `green`,
-//   fire: `orange`,
-// };
+const colorsByType = {
+  grass: `green`,
+  fire: `orange`,
+};
 
 export default function Index() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
