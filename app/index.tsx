@@ -68,7 +68,7 @@ export default function Index() {
           <Text style={styles.name}>{pokemon.name}</Text>
           {/* types of pokemon */}
           <Text style={styles.types}>{pokemon.types[0].type.name}</Text>
-          {/* <View style={{ flexDirection: "row" }}>
+          <View style={{ flexDirection: "row" }}>
             <Image
               source={{ uri: pokemon.image }}
               style={{ width: 100, height: 100 }}
@@ -77,7 +77,7 @@ export default function Index() {
               source={{ uri: pokemon.imageBack }}
               style={{ width: 100, height: 100 }}
             />
-          </View> */}
+          </View>
         </View>
       ))}
       ;
