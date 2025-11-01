@@ -40,7 +40,7 @@ export default function Index() {
 
       // Fetch detailed info for each pokemon in parallel
       const detailedPokemons = await Promise.all(
-        data.result.map(async (pokemon: any) => {
+        data.results.map(async (pokemon: any) => {
           const res = await fetch(pokemon.url);
           const details = await res.json();
           return {
