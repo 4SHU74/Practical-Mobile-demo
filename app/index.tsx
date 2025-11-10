@@ -65,21 +65,30 @@ export default function Index() {
   return (
     <ScrollView contentContainerStyle={{ gap: 16 }}>
       {pokemons.map((pokemon) => (
-        <View key={pokemon.name} style={{ backgroundColor: `red` }}>
-          <Text style={styles.name}>{pokemon.name}</Text>
-          {/* types of pokemon */}
-          <Text style={styles.types}>{pokemon.types[0].type.name}</Text>
-          <View style={{ flexDirection: "row" }}>
-            <Image
-              source={{ uri: pokemon.image }}
-              style={{ width: 100, height: 100 }}
-            />
-            <Image
-              source={{ uri: pokemon.imageBack }}
-              style={{ width: 100, height: 100 }}
-            />
+        <Link key={pokemon.name}>
+          <View
+            style={{
+              // @ts-ignore
+              backgroundColor: colorsByType[poekmon.types[0].type.name] + 50,
+              padding: 20,
+              borderRadius: 20,
+            }}
+          >
+            <Text style={styles.name}>{pokemon.name}</Text>
+            {/* types of pokemon */}
+            <Text style={styles.types}>{pokemon.types[0].type.name}</Text>
+            <View style={{ flexDirection: "row" }}>
+              <Image
+                source={{ uri: pokemon.image }}
+                style={{ width: 100, height: 100 }}
+              />
+              <Image
+                source={{ uri: pokemon.imageBack }}
+                style={{ width: 100, height: 100 }}
+              />
+            </View>
           </View>
-        </View>
+        </Link>
       ))}
       ;
     </ScrollView>
@@ -90,10 +99,12 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 28,
     fontWeight: `bold`,
+    textAlign: `center`,
   },
   types: {
     fontSize: 20,
     fontWeight: `bold`,
     color: `grey`,
+    textAlign: `center`,
   },
 });
