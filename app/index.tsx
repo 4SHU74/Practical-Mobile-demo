@@ -1,5 +1,13 @@
+import { Link } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 interface Pokemon {
   name: string;
@@ -16,11 +24,25 @@ interface PokemonType {
   // url: "https://pokeapi.co/api/v2/type/18";
 }
 
-const colorsByType = {
-  grass: `green`,
-  fire: `orange`,
-  water: `blue`,
-  bug: `limegreen`,
+const colorsByType: Record<string, string> = {
+  normal: "#A8A878",
+  fire: "#F08030",
+  water: "#6890F0",
+  grass: "#78C850",
+  electric: "#F8D030",
+  ice: "#98D8D8",
+  fighting: "#C03028",
+  poison: "#A040A0",
+  ground: "#E0C068",
+  flying: "#A890F0",
+  psychic: "#F85888",
+  bug: "#A8B820",
+  rock: "#B8A038",
+  ghost: "#705898",
+  dark: "#705848",
+  steel: "#B8B8D0",
+  dragon: "#7038F8",
+  fairy: "#F0B6BC",
 };
 
 export default function Index() {
@@ -63,34 +85,51 @@ export default function Index() {
   }
 
   return (
-    <ScrollView contentContainerStyle={{ gap: 16 }}>
+    <ScrollView
+      contentContainerStyle={{
+        gap: 16,
+        padding: 16,
+      }}
+    >
       {pokemons.map((pokemon) => (
-        <Link key={pokemon.name}>
-          <View
-            style={{
-              // @ts-ignore
-              backgroundColor: colorsByType[poekmon.types[0].type.name] + 50,
-              padding: 20,
-              borderRadius: 20,
-            }}
-          >
-            <Text style={styles.name}>{pokemon.name}</Text>
-            {/* types of pokemon */}
-            <Text style={styles.types}>{pokemon.types[0].type.name}</Text>
-            <View style={{ flexDirection: "row" }}>
-              <Image
-                source={{ uri: pokemon.image }}
-                style={{ width: 100, height: 100 }}
-              />
-              <Image
-                source={{ uri: pokemon.imageBack }}
-                style={{ width: 100, height: 100 }}
-              />
+        <Link
+          asChild
+          href={{ pathname: "/Details", params: { name: pokemon.name } }}
+          key={pokemon.name}
+        >
+          <TouchableOpacity>
+            <View
+              style={{
+                // @ts-ignore
+                backgroundColor:
+                  colorsByType[pokemon.types[0].type.name] + "4D",
+                padding: 20,
+                borderRadius: 20,
+              }}
+            >
+              <Text style={styles.name}>{pokemon.name}</Text>
+              {/* types of pokemon */}
+              <Text style={styles.types}>{pokemon.types[0].type.name}</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Image
+                  source={{ uri: pokemon.image }}
+                  style={{ width: 100, height: 100 }}
+                />
+                <Image
+                  source={{ uri: pokemon.imageBack }}
+                  style={{ width: 100, height: 100 }}
+                />
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
         </Link>
       ))}
-      ;
     </ScrollView>
   );
 }
@@ -106,5 +145,8 @@ const styles = StyleSheet.create({
     fontWeight: `bold`,
     color: `grey`,
     textAlign: `center`,
+  },
+  image: {
+    justifyContent: "center",
   },
 });
